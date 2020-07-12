@@ -1,4 +1,4 @@
-# ASASUGAFI
+# simple Covid Tracker
 
 #Project_React
 
