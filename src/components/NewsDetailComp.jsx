@@ -15,7 +15,12 @@ const NewsDetailComp = (props) => {
           />
         </div>
         <div className="text-left ml-3 text-white col-lg-10 row-sm-12">
-          <a href={url} className="text-white">
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white"
+          >
             <h4>
               <strong style={{ color: "#e43f5a" }}>{title}</strong>
             </h4>
