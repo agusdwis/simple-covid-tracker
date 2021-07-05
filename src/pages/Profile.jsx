@@ -3,8 +3,18 @@ import { Redirect } from "react-router-dom";
 import Header from "../components/Navigation";
 import { connect } from "react-redux";
 import Footer from "../components/Footer";
+import { checkAuth } from "../store/actions/actionUser";
+
 const Profile = (props) => {
-  if (!props.dataUser.is_login) {
+  const isLogin = localStorage.getItem("isLogin");
+  React.useEffect(() => {
+    if (isLogin) {
+      props.checkAuth();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (!props.dataUser.is_login && !isLogin) {
     return (
       <Redirect
         to={{
@@ -29,7 +39,7 @@ const Profile = (props) => {
             </h1>
             <img
               src={props.dataUser.avatar}
-              class="avatar"
+              className="avatar"
               alt="avatar icon"
               style={{ width: "50vmin" }}
             />
@@ -53,5 +63,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Profile);
+const mapDispatchToProps = {
+  checkAuth: (el) => checkAuth(el),
+};
 
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

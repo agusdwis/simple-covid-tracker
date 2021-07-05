@@ -10,12 +10,12 @@ import Footer from "../components/Footer";
 class SignIn extends Component {
   postLogin = async () => {
     await this.props.doLogin();
-    console.warn("test post login", this.props);
-    const is_login = this.props.login;
+    const is_login = this.props.login || localStorage.getItem("isLogin");
     if (is_login) {
       this.props.history.push("/profile");
     }
   };
+
   render() {
     return (
       <React.Fragment>
@@ -25,7 +25,10 @@ class SignIn extends Component {
             <h2 className="text-white">Sign In</h2>
             <form onSubmit={(el) => el.preventDefault()}>
               <div className="form-group text-left">
-                <label className="text-white" for="exampleFormControlInput1">
+                <label
+                  className="text-white"
+                  htmlFor="exampleFormControlInput1"
+                >
                   Name
                 </label>
                 <input
@@ -38,7 +41,10 @@ class SignIn extends Component {
                 />
               </div>
               <div className="form-group text-left">
-                <label className="text-white" for="exampleFormControlInput2">
+                <label
+                  className="text-white"
+                  htmlFor="exampleFormControlInput2"
+                >
                   Password
                 </label>
                 <input

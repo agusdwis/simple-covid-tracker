@@ -1,26 +1,28 @@
 import React from "react";
 import Navigation from "../components/Navigation";
 import Welcome from "../components/Welcome";
-// import SignIn from "../components/SignInComp";
-// import Profile from "../components/Profile";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import Footer from "../components/Footer";
+import { checkAuth } from "../store/actions/actionUser";
 class Home extends React.Component {
+  componentDidMount() {
+    this.props.checkAuth();
+  }
+
   render() {
+    const isLogin = localStorage.getItem("isLogin");
     return (
       <div>
-        {this.props.dataUser.is_login ? (
+        {this.props.dataUser.is_login || isLogin ? (
           <React.Fragment>
             <div>
-              <Navigation {...this.props}/>
+              <Navigation {...this.props} />
               <div className="jumbotron jumbotron-fluid">
                 <div className="container">
                   <Welcome />
                 </div>
               </div>
-              {/* <SignIn /> */}
-              {/* <Profile /> */}
             </div>
           </React.Fragment>
         ) : (
@@ -43,4 +45,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Home);
+const mapDispatchToProps = {
+  checkAuth: (el) => checkAuth(el),
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

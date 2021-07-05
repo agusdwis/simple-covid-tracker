@@ -1,8 +1,8 @@
 const initialState = {
-    username: "",
-    email: "",
-    avatar: "",
-    is_login: false,
+  username: "",
+  email: "",
+  avatar: "",
+  is_login: false,
 };
 
 export default function userReducer(userState = initialState, action) {
